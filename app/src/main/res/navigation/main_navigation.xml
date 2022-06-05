@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.nickrooden.picknumber.presentation.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_levelFrag"
+            app:destination="@id/levelFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFrag"
+        android:name="com.nickrooden.picknumber.presentation.GameFrag"
+        android:label="GameFrag" >
+        <argument
+            android:name="level"
+            app:argType="com.nickrooden.picknumber.domain.Level" />
+        <action
+            android:id="@+id/action_gameFrag_to_resultFrag"
+            app:destination="@id/resultFrag"
+            app:popUpTo="@id/gameFrag"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/levelFrag"
+        android:name="com.nickrooden.picknumber.presentation.LevelFrag"
+        android:label="LevelFrag" >
+        <action
+            android:id="@+id/action_levelFrag_to_gameFrag"
+            app:destination="@id/gameFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFrag"
+        android:name="com.nickrooden.picknumber.presentation.ResultFrag"
+        android:label="ResultFrag" >
+        <argument
+            android:name="resultgm"
+            app:argType="com.nickrooden.picknumber.domain.ResultGm" />
+    </fragment>
+</navigation>
