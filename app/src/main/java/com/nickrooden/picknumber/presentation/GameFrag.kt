@@ -52,48 +52,51 @@ class GameFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         observeViewModel()
-        setClickListenerOnOptions()
+ //       setClickListenerOnOptions()
     }
-    private fun setClickListenerOnOptions(){
-        for (opt in optins){
-            opt.setOnClickListener {
-                viewModel.chooseAnswer(opt.text.toString().toInt())
-            }
-        }
-    }
+//    private fun setClickListenerOnOptions(){
+//        for (opt in optins){
+//            opt.setOnClickListener {
+//                viewModel.chooseAnswer(opt.text.toString().toInt())
+//            }
+//        }
+//    }
     private fun observeViewModel() {
-        viewModel.timerStr.observe(viewLifecycleOwner) {
-            binding.timer.text = it.toString()
-        }
+//        viewModel.timerStr.observe(viewLifecycleOwner) {
+//            binding.timer.text = it.toString()
+//        }
 
-        viewModel.question.observe(viewLifecycleOwner) {
-            binding.sum.text = it.sum.toString()
-            binding.visibleNbr.text = it.seeNumber.toString()
-            for (i in 0 until optins.size) {
-                optins[i].text = it.optNumbers[i].toString()
-            }
-        }
+//        viewModel.question.observe(viewLifecycleOwner) {
+//            binding.sum.text = it.sum.toString()
+//            binding.visibleNbr.text = it.seeNumber.toString()
+//            for (i in 0 until optins.size) {
+//                optins[i].text = it.optNumbers[i].toString()
+//            }
+//        }
 
-        viewModel.percentOfRightAnswer.observe(viewLifecycleOwner) {
-            binding.progressBar.setProgress(it, true)
-        }
-        viewModel.enoughCountOfRightAnswers.observe(viewLifecycleOwner) {
-            binding.progressText.setTextColor(getColorByState(it))
-        }
-        viewModel.enoughPercentOfRightAnswers.observe(viewLifecycleOwner) {
-            val color = getColorByState(it)
-            binding.progressBar.progressTintList = ColorStateList.valueOf(color)
-        }
-        viewModel.minPercentOfRightAnswer.observe(viewLifecycleOwner) {
-            binding.progressBar.secondaryProgress = it
-        }
+//        viewModel.percentOfRightAnswer.observe(viewLifecycleOwner) {
+//            binding.progressBar.setProgress(it, true)
+//        }
+//        viewModel.enoughCountOfRightAnswers.observe(viewLifecycleOwner) {
+//            binding.progressText.setTextColor(getColorByState(it))
+//        }
+//        viewModel.enoughPercentOfRightAnswers.observe(viewLifecycleOwner) {
+//            val color = getColorByState(it)
+//            binding.progressBar.progressTintList = ColorStateList.valueOf(color)
+//        }
+//        viewModel.minPercentOfRightAnswer.observe(viewLifecycleOwner) {
+//            binding.progressBar.secondaryProgress = it
+//        }
         viewModel.gameResultGm.observe(viewLifecycleOwner) {
             launchResultFragment(it)
         }
-        viewModel.progressAnswers.observe(viewLifecycleOwner){
-            binding.progressText.text = it
-        }
+//        viewModel.progressAnswers.observe(viewLifecycleOwner){
+//            binding.progressText.text = it
+//        }
     }
 
     private fun launchResultFragment(result: ResultGm) {
@@ -104,14 +107,14 @@ class GameFrag : Fragment() {
 
     }
 
-    private fun getColorByState(state: Boolean): Int{
-        val colorToBar = if (state){
-            android.R.color.holo_green_light
-        }else{
-            android.R.color.holo_red_light
-        }
-        return ContextCompat.getColor(requireContext(), colorToBar)
-    }
+//    private fun getColorByState(state: Boolean): Int{
+//        val colorToBar = if (state){
+//            android.R.color.holo_green_light
+//        }else{
+//            android.R.color.holo_red_light
+//        }
+//        return ContextCompat.getColor(requireContext(), colorToBar)
+//    }
 
 
     override fun onDestroy() {

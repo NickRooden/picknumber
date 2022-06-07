@@ -1,7 +1,11 @@
 package com.nickrooden.picknumber.presentation
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.nickrooden.picknumber.R
 import com.nickrooden.picknumber.domain.ResultGm
@@ -62,3 +66,54 @@ private fun rightPercent(resultgm: ResultGm) = with(resultgm){
     }
 
 }
+// GameFragment
+@BindingAdapter("numberToText")
+fun bindNumberToText(textView: TextView, number: Int){
+    textView.text = number.toString()
+}
+
+@BindingAdapter("setColorText")
+fun bindSetColorText(textView: TextView, greenColor: Boolean){
+    textView.setTextColor(getColorByState(textView.context, greenColor))
+}
+@BindingAdapter("setColorBar")
+fun bindSetColorBar(bar: ProgressBar, greenColor: Boolean){
+    val color = getColorByState(bar.context, greenColor)
+          bar.progressTintList = ColorStateList.valueOf(color)
+}
+private fun getColorByState(context: Context, state: Boolean): Int{
+    val colorToBar = if (state){
+        android.R.color.holo_green_light
+    }else{
+        android.R.color.holo_red_light
+    }
+    return ContextCompat.getColor(context, colorToBar)
+}
+
+interface OnOptClick{
+    fun invoke(opt: Int)
+}
+@BindingAdapter("onOptClick")
+fun bindOnOptClick(textView: TextView, obj: OnOptClick){
+    textView.setOnClickListener {
+        obj.invoke(textView.text.toString().toInt())
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

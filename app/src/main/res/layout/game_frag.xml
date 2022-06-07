@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nickrooden.picknumber.presentation.GameViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,6 +14,7 @@
 
     <TextView
         android:id="@+id/timer"
+        android:text="@{viewModel.timerStr}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -21,6 +27,7 @@
 
     <TextView
         android:id="@+id/sum"
+        app:numberToText="@{viewModel.question.sum}"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -39,6 +46,7 @@
 
     <TextView
         android:id="@+id/visible_nbr"
+        app:numberToText="@{viewModel.question.seeNumber}"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -76,7 +84,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:text="TextView"
+        app:setColorText="@{viewModel.enoughCountOfRightAnswers}"
+        android:text="@{viewModel.progressAnswers}"
+        tools:text="Right Answers %s (min Answers %s)"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -89,6 +99,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:setColorBar="@{viewModel.enoughPercentOfRightAnswers}"
+        android:progress="@{viewModel.percentOfRightAnswer}"
+        android:secondaryProgress="@{viewModel.minPercentOfRightAnswer}"
         app:layout_constraintBottom_toTopOf="@+id/opt2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +109,8 @@
 
     <TextView
         android:id="@+id/opt1"
+        app:onOptClick="@{opt -> viewModel.chooseAnswer(opt)}"
+        android:text="@{viewModel.question.optNumbers.get(0).toString()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +123,8 @@
 
     <TextView
         android:id="@+id/opt2"
+        app:onOptClick="@{opt -> viewModel.chooseAnswer(opt)}"
+        android:text="@{viewModel.question.optNumbers.get(1).toString()}"
         style="@style/opt_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,6 +137,8 @@
 
     <TextView
         android:id="@+id/opt3"
+        app:onOptClick="@{opt -> viewModel.chooseAnswer(opt)}"
+        android:text="@{viewModel.question.optNumbers.get(2).toString()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +150,8 @@
 
     <TextView
         android:id="@+id/opt4"
+        app:onOptClick="@{opt -> viewModel.chooseAnswer(opt)}"
+        android:text="@{viewModel.question.optNumbers.get(3).toString()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +163,8 @@
 
     <TextView
         android:id="@+id/opt5"
+        app:onOptClick="@{opt -> viewModel.chooseAnswer(opt)}"
+        android:text="@{viewModel.question.optNumbers.get(4).toString()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -153,6 +176,8 @@
 
     <TextView
         android:id="@+id/opt6"
+        app:onOptClick="@{opt -> viewModel.chooseAnswer(opt)}"
+        android:text="@{viewModel.question.optNumbers.get(5).toString()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

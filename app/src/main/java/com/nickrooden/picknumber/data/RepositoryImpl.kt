@@ -26,12 +26,12 @@ object RepositoryImpl : Repository {
     override fun getQuestion(maxSum: Int): Question {
 
         val sum = Random.nextInt(MIN_SUM, maxSum + 1)
-        val seeNumber = Random.nextInt(MIN_SEENMBR, sum - 2)
+        val seeNumber = Random.nextInt(MIN_SEENMBR, sum - 1)
         val rightAnswer = sum - seeNumber
-        val optAnswers = hashSetOf<Int>()
+        val optAnswers = HashSet<Int>()
         optAnswers.add(rightAnswer)
 
-        val from = max(2,rightAnswer - MIN_OPT_ANSWERS)
+        val from = max(MIN_SEENMBR,rightAnswer - MIN_OPT_ANSWERS)
         val to = min(maxSum, rightAnswer + MIN_OPT_ANSWERS)
         while (optAnswers.size < MIN_OPT_ANSWERS){
 
